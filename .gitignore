@@ -1,2 +1,8 @@
 /certs
 .env
+.venv
+__pycache__/
+app/__pycache__/
+app/common/__pycache__/
+app/crypto/__pycache__/
+app/storage/__pycache__/
