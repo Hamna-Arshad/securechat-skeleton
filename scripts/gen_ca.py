@@ -37,7 +37,7 @@ def generate_root_ca(name: str, out_dir: str = "certs"):
     with open(out_path / "root_ca.crt", "wb") as f:
         f.write(cert.public_bytes(serialization.Encoding.PEM))
 
-    print(f"[+] Root CA generated in '{out_dir}'")
+    print(f"Root CA generated in '{out_dir}'")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate Root CA")

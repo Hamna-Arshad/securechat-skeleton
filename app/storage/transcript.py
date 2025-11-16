@@ -3,11 +3,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 
 def compute_transcript_hash(transcript):
-    """
-    Compute SHA256 hash over transcript lines.
-    transcript: list of dicts with keys seqno, ts, ct, sig, peer_fp
-    Returns: hex string
-    """
+
     lines = []
     for entry in transcript:
         line = f"{entry['seqno']}|{entry['ts']}|{entry['ct']}|{entry['sig']}|{entry['peer_fp']}"
@@ -18,10 +14,7 @@ def compute_transcript_hash(transcript):
     return digest.finalize().hex()
 
 def generate_receipt(transcript, priv_key, peer):
-    """
-    Sign the transcript hash with priv_key to generate a receipt.
-    Returns dict: {type, peer, first_seq, last_seq, transcript_sha256, sig}
-    """
+
     transcript_hash = compute_transcript_hash(transcript)
     sig = priv_key.sign(bytes.fromhex(transcript_hash),
                         padding.PKCS1v15(),
@@ -38,10 +31,7 @@ def generate_receipt(transcript, priv_key, peer):
     return receipt
 
 def verify_receipt(transcript, receipt, pub_key):
-    """
-    Verify receipt signature and hash.
-    Returns True if valid, False otherwise.
-    """
+    
     computed_hash = compute_transcript_hash(transcript)
     if computed_hash != receipt["transcript_sha256"]:
         print("[!] Transcript hash mismatch")

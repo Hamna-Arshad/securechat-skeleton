@@ -49,7 +49,7 @@ def generate_cert(cn: str, out_path: str = "certs", ca_cert_path="certs/root_ca.
     with open(out_path / f"{cn}.crt", "wb") as f:
         f.write(cert.public_bytes(serialization.Encoding.PEM))
 
-    print(f"[+] Certificate for '{cn}' generated in '{out_path}'")
+    print(f"Certificate for '{cn}' generated in '{out_path}'")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate server/client cert signed by Root CA")
